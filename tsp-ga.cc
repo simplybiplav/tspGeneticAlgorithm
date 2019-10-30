@@ -178,7 +178,7 @@ TSPGenome findAShortPath(const vector<Point> &points,
         iter->computeCircuitLength(points);
     }
 
-    for (int genLoop = 1; genLoop <= numGenerations; genLoop++)
+    for (int genLoop = 0; genLoop < numGenerations; genLoop++)
     {
         sort(tspPopulation.begin(),tspPopulation.end(),isShorterPath);
         for (int sibLoop = (populationSize - keepPopulation)-1; sibLoop < populationSize; sibLoop++)
@@ -198,7 +198,7 @@ TSPGenome findAShortPath(const vector<Point> &points,
         if( genLoop % 10 == 0)
         {
             cout << "Generation "<<genLoop<<" : shortest path is "<<tspPopulation[0].getCircuitLength() << " ";
-            printIntVector(tspPopulation[0].getOrder());
+            //printIntVector(tspPopulation[0].getOrder());
             cout <<endl;
         }
     }
@@ -230,10 +230,10 @@ int main( int argc, char**argv)
     populationPercent = atof (argv[3]);
     mutateRatio = atof(argv[4]);
    
-    cout << populationSize << "  population size "<<endl;
-    cout << numGenerations << " no of gens"<<endl;
-    cout << populationPercent << " population %" <<endl;
-    cout << mutateRatio << " mutate ratio" <<endl;
+    //cout << populationSize << "  population size "<<endl;
+    //cout << numGenerations << " no of gens"<<endl;
+    //cout << populationPercent << " population %" <<endl;
+    //cout << mutateRatio << " mutate ratio" <<endl;
     cout << "Enter the number of points" << endl;
     cin >> noOfPoints;
     for (int loop =0; loop < noOfPoints;loop++)
@@ -246,7 +246,7 @@ int main( int argc, char**argv)
     }
     keepPopulation = populationSize * populationPercent;
     numMutations = mutateRatio * populationSize;
-    printPointVector(VerticesVector);
+    //printPointVector(VerticesVector);
     TSPGenome shortGenome(findAShortPath(VerticesVector,populationSize,numGenerations,keepPopulation,numMutations));
     shortestVectorPath = shortGenome.getOrder();
     shortestDistance = shortGenome.getCircuitLength();
